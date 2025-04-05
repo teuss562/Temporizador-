@@ -1,11 +1,8 @@
 function atualizarContador() {
-  // Data inicial: 11 de setembro de 2024 às 00:00 no horário de Brasília (UTC-3)
-  const inicio = new Date('2024-09-11T03:00:00Z'); // UTC equivalente
+  const inicio = new Date('2024-09-11T03:00:00Z');
 
-  // Hora atual em UTC
   const agoraUTC = new Date();
 
-  // Ajuste para horário de Brasília (UTC-3)
   const agoraBrasilia = new Date(agoraUTC.getTime() - 3 * 60 * 60 * 1000);
 
   const diff = agoraBrasilia - inicio;
@@ -26,4 +23,4 @@ function atualizarContador() {
 }
 
 setInterval(atualizarContador, 1000);
-atualizarContador(); // atualiza na primeira carga
+atualizarContador();
