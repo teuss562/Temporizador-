@@ -1,26 +1,34 @@
-function atualizarContador() {
-  const inicio = new Date('2024-09-11T03:00:00Z');
+function updateTimer() {
+  const startDate = new Date('2024-09-11T00:00:00');
+  const now = new Date();
 
-  const agoraUTC = new Date();
+  let years = now.getFullYear() - startDate.getFullYear();
+  let months = now.getMonth() - startDate.getMonth();
+  let days = now.getDate() - startDate.getDate();
+  let hours = now.getHours() - startDate.getHours();
 
-  const agoraBrasilia = new Date(agoraUTC.getTime() - 3 * 60 * 60 * 1000);
-
-  const diff = agoraBrasilia - inicio;
-
-  if (diff <= 0) {
-    document.getElementById("timer").textContent = "Ainda não começou.";
-    return;
+  if (hours < 0) {
+    hours += 24;
+    days -= 1;
   }
 
-  const segundos = Math.floor(diff / 1000);
-  const dias = Math.floor(segundos / 86400);
-  const horas = Math.floor((segundos % 86400) / 3600);
-  const minutos = Math.floor((segundos % 3600) / 60);
-  const segs = segundos % 60;
+  if (days < 0) {
+    const lastMonth = new Date(now.getFullYear(), now.getMonth(), 0);
+    days += lastMonth.getDate();
+    months -= 1;
+  }
 
-  document.getElementById("timer").textContent =
-    `${dias} dias, ${horas} horas, ${minutos} minutos e ${segs} segundos`;
+  if (months < 0) {
+    months += 12;
+    years -= 1;
+  }
+
+  const totalMonths = years * 12 + months;
+
+  document.getElementById('months').textContent = totalMonths;
+  document.getElementById('days').textContent = days;
+  document.getElementById('hours').textContent = hours;
 }
 
-setInterval(atualizarContador, 1000);
-atualizarContador();
+updateTimer();
+setInterval(updateTimer, 60 * 60 * 1000); // Atualiza a cada hora

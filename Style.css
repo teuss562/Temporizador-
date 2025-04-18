@@ -1,9 +1,31 @@
 body {
   font-family: Arial, sans-serif;
-  text-align: center;
-  margin-top: 50px;
+  background: #f0f0f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
-#timer {
-  font-size: 2em;
+.timer {
+  background: #fff;
+  padding: 30px 40px;
+  border-radius: 15px;
+  box-shadow: 0 0 12px rgba(0,0,0,0.2);
+  text-align: center;
+}
+
+.timer h1 {
+  margin-bottom: 20px;
+  font-size: 22px;
+}
+
+.unit {
+  margin: 10px 0;
+  font-size: 20px;
+  color: #333;
+}
+
+.label {
+  font-weight: bold;
 }
