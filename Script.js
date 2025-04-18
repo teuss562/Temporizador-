@@ -1,34 +1,25 @@
+let startDate = new Date();
+
 function updateTimer() {
-  const startDate = new Date('2024-09-11T00:00:00');
-  const now = new Date();
+  let now = new Date();
+  let diff = now - startDate;
 
-  let years = now.getFullYear() - startDate.getFullYear();
-  let months = now.getMonth() - startDate.getMonth();
-  let days = now.getDate() - startDate.getDate();
-  let hours = now.getHours() - startDate.getHours();
+  let seconds = Math.floor(diff / 1000);
+  let minutes = Math.floor(seconds / 60);
+  let hours = Math.floor(minutes / 60);
+  let days = Math.floor(hours / 24);
+  let months = Math.floor(days / 30); // Aproximação
 
-  if (hours < 0) {
-    hours += 24;
-    days -= 1;
-  }
+  seconds = seconds % 60;
+  minutes = minutes % 60;
+  hours = hours % 24;
+  days = days % 30;
 
-  if (days < 0) {
-    const lastMonth = new Date(now.getFullYear(), now.getMonth(), 0);
-    days += lastMonth.getDate();
-    months -= 1;
-  }
-
-  if (months < 0) {
-    months += 12;
-    years -= 1;
-  }
-
-  const totalMonths = years * 12 + months;
-
-  document.getElementById('months').textContent = totalMonths;
-  document.getElementById('days').textContent = days;
-  document.getElementById('hours').textContent = hours;
+  document.getElementById('months').textContent = String(months).padStart(2, '0');
+  document.getElementById('days').textContent = String(days).padStart(2, '0');
+  document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+  document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+  document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
 }
 
-updateTimer();
-setInterval(updateTimer, 60 * 60 * 1000); // Atualiza a cada hora
+setInterval(updateTimer, 1000);
